@@ -109,25 +109,14 @@ const addTask = createAppAsyncThunk<{ task: TaskType }, { title: string; todolis
     }
   },
 );
-// export const addTaskTC =
-//   (title: string, todolistId: string): AppThunk =>
-//   (dispatch) => {
-//     dispatch(appActions.setAppStatus({ status: "loading" }));
-//     todolistsAPI
-//       .createTask(todolistId, title)
-//       .then((res) => {
-//         if (res.data.resultCode === 0) {
-//           const task = res.data.data.item;
-//           dispatch(tasksActions.addTask({ task }));
-//           dispatch(appActions.setAppStatus({ status: "succeeded" }));
-//         } else {
-//           handleServerAppError(res.data, dispatch);
-//         }
-//       })
-//       .catch((error) => {
-//         handleServerNetworkError(error, dispatch);
-//       });
-//   };
+
+export const updateTask = createAppAsyncThunk<any, any>(`${slice.name}/updateTask`, async (arg, thunkAPI) => {
+  const { dispatch, rejectWithValue, getState } = thunkAPI;
+
+  try {
+  } catch (e) {}
+});
+
 export const updateTaskTC =
   (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string): AppThunk =>
   (dispatch, getState) => {
