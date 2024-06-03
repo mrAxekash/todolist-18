@@ -126,11 +126,15 @@ test("correct task should be added to correct array", () => {
 });
 
 test("status of specified task should be changed", () => {
-  const action = tasksActions.updateTask({
-    taskId: "2",
-    model: { status: TaskStatuses.New },
-    todolistId: "todolistId2",
-  });
+  const action = tasksThunks.updateTask.fulfilled(
+    {
+      taskId: "2",
+      domainModel: { status: TaskStatuses.New },
+      todolistId: "todolistId2",
+    },
+    "requestId",
+    { taskId: "2", todolistId: "todolistId2", domainModel: { status: TaskStatuses.New } },
+  );
 
   const endState = tasksSlice(startState, action);
 
@@ -139,7 +143,11 @@ test("status of specified task should be changed", () => {
 });
 
 test("title of specified task should be changed", () => {
-  const action = tasksActions.updateTask({ taskId: "2", model: { title: "yogurt" }, todolistId: "todolistId2" });
+  const action = tasksThunks.updateTask.fulfilled(
+    { taskId: "2", domainModel: { title: "yogurt" }, todolistId: "todolistId2" },
+    "requestId",
+    { taskId: "2", domainModel: { title: "yogurt" }, todolistId: "todolistId2" },
+  );
 
   const endState = tasksSlice(startState, action);
 
