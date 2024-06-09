@@ -27,8 +27,8 @@ const slice = createSlice({
       .addCase(todolistsActions.removeTodolist, (state, action) => {
         delete state[action.payload.id];
       })
-      .addCase(todolistsActions.setTodolists, (state, action) => {
-        action.payload.todolists.forEach((tl) => {
+      .addCase(todolistsActions.fetchTodolists.fulfilled, (state, action) => {
+        action.payload.todolists.forEach((tl: any) => {
           state[tl.id] = [];
         });
       })
@@ -132,7 +132,7 @@ const updateTask = createAppAsyncThunk<
     const res = await todolistsAPI.updateTask(arg.todolistId, arg.taskId, apiModel);
     if (res.data.resultCode === 0) {
       dispatch(appActions.setAppStatus({ status: "succeeded" }));
-      return { taskId: arg.taskId, domainModel: res.data.data, todolistId: arg.todolistId };
+      return { taskId: arg.taskId, domainModel: arg.domainModel, todolistId: arg.todolistId };
 
       // dispatch(tasksActions.updateTask({ taskId, model: domainModel, todolistId }));
     } else {

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import {
   addTodolistTC,
   changeTodolistTitleTC,
-  fetchTodolistsTC,
   FilterValuesType,
   removeTodolistTC,
   todolistsActions,
@@ -34,8 +33,8 @@ export const TodolistsList: React.FC<PropsType> = ({ demo = false }) => {
     if (demo || !isLoggedIn) {
       return;
     }
-    const thunk = fetchTodolistsTC();
-    dispatch(thunk);
+    // const thunk = fetchTodolistsTC();
+    dispatch(todolistsActions.fetchTodolists());
   }, []);
 
   const removeTask = useCallback(function (id: string, todolistId: string) {

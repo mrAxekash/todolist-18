@@ -65,7 +65,7 @@ test("correct filter of todolist should be changed", () => {
   expect(endState[1].filter).toBe(newFilter);
 });
 test("todolists should be added", () => {
-  const action = todolistsActions.setTodolists({ todolists: startState });
+  const action = todolistsActions.fetchTodolists.fulfilled({ todolists: startState }, "requestId", undefined);
 
   const endState = todolistsReducer([], action);
 

@@ -126,15 +126,8 @@ test("correct task should be added to correct array", () => {
 });
 
 test("status of specified task should be changed", () => {
-  const action = tasksThunks.updateTask.fulfilled(
-    {
-      taskId: "2",
-      domainModel: { status: TaskStatuses.New },
-      todolistId: "todolistId2",
-    },
-    "requestId",
-    { taskId: "2", todolistId: "todolistId2", domainModel: { status: TaskStatuses.New } },
-  );
+  const payload = { taskId: "2", todolistId: "todolistId2", domainModel: { status: TaskStatuses.New } };
+  const action = tasksThunks.updateTask.fulfilled(payload, "requestId", payload);
 
   const endState = tasksSlice(startState, action);
 
@@ -143,11 +136,8 @@ test("status of specified task should be changed", () => {
 });
 
 test("title of specified task should be changed", () => {
-  const action = tasksThunks.updateTask.fulfilled(
-    { taskId: "2", domainModel: { title: "yogurt" }, todolistId: "todolistId2" },
-    "requestId",
-    { taskId: "2", domainModel: { title: "yogurt" }, todolistId: "todolistId2" },
-  );
+  const payload = { taskId: "2", domainModel: { title: "yogurt" }, todolistId: "todolistId2" };
+  const action = tasksThunks.updateTask.fulfilled(payload, "requestId", payload);
 
   const endState = tasksSlice(startState, action);
 
@@ -190,12 +180,16 @@ test("propertry with todolistId should be deleted", () => {
 });
 
 test("empty arrays should be added when we set todolists", () => {
-  const action = todolistsActions.setTodolists({
-    todolists: [
-      { id: "1", title: "title 1", order: 0, addedDate: "" },
-      { id: "2", title: "title 2", order: 0, addedDate: "" },
-    ],
-  });
+  const action = todolistsActions.fetchTodolists.fulfilled(
+    {
+      todolists: [
+        { id: "1", title: "title 1", order: 0, addedDate: "" },
+        { id: "2", title: "title 2", order: 0, addedDate: "" },
+      ],
+    },
+    "requestId",
+    undefined,
+  );
 
   const endState = tasksSlice({}, action);
 
